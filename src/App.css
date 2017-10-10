@@ -154,12 +154,12 @@
 .other.boss {
   animation-name: shakeContinuous;
   animation-duration: 500ms;
-  animation-delay: 566ms; }
+  animation-delay: 4648ms; }
 
 .other.badGuy {
   animation-name: shake;
   animation-duration: 10000ms;
-  animation-delay: 361ms; }
+  animation-delay: 398ms; }
 
 .other::after {
   content: attr(data-property);

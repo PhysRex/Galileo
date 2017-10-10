@@ -1,5 +1,5 @@
 {
-  "name": "Galileo",
+  "name": "galileo",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -18,7 +18,7 @@
     "test": "react-scripts test --env=jsdom", 
     "deploy": "npm run build && gh-pages -d build"
   },
-  "homepage": "http://PhysRex.github.io/Galileo",
+  "homepage": "http://PhysRex.github.io/galileo",
   "devDependencies": {
     "gh-pages": "^1.0.0"
   }
