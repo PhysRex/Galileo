@@ -1,0 +1,589 @@
+// https://neoz7.deviantart.com/art/Pixel-Tree-495024301	
+// https://neoz7.deviantart.com/art/Pixel-Tree-459593617
+//
+//
+// https://stackoverflow.com/questions/8422831/part-of-div-transparent
+
+
+@import url('https://fonts.googleapis.com/css?family=Aladin|Caveat+Brush|Itim|Neucha|Patrick+Hand|Audiowide|Baloo+Tammudu|Coda')
+
+=backgroundImg($url)
+	background: url($url)
+	background-size: contain
+	background-position: center
+	background-repeat: no-repeat
+	
+
+=animation ($animate...) 
+	$max: length($animate)
+	$animations: ''
+
+	@for $i from 1 through $max 
+		$animations: #{$animations + nth($animate, $i)}
+
+	@if $i < $max 
+		$animations: #{$animations + ", "}
+	
+	-webkit-animation: $animations
+	-moz-animation:    $animations
+	-o-animation:      $animations
+	animation:         $animations
+
+=keyframes($animationName) 
+	@-webkit-keyframes #{$animationName} 
+		@content
+
+	@-moz-keyframes #{$animationName} 
+		@content
+
+	@-o-keyframes #{$animationName} 
+		@content
+
+	@keyframes #{$animationName} 
+		@content
+
+// +keyframes(move-the-object)
+// 	0%
+// 		left: 100px
+// 	100%
+// 		left: 200px
+
+// .object-to-animate
+// 	@include animation('move-the-object .5s 1', 'move-the-object-again .5s 1 .5s')
+
+
+
+.row
+	// border: 1px solid red
+
+[class^="col-"]
+	// border: 1px solid blue
+
+
+
+
+
+
+body
+	// background: blue
+
+#root
+	padding: 0 !important
+
+
+///////////////////////////////////////////////////////////
+////   Intro   ////////////////////////////////////////////
+
+.intro
+	width: 100vw
+	height: 100vh
+	background: url("img/ForestBackground4-pixelArt.png") no-repeat top center fixed
+	background-size: cover
+
+.title
+	margin: 5vh 0
+	color: rgba(130,250,130,1)
+	font-family: 'Audiowide', cursive
+	font-size: 15vw
+	text-shadow: 0px 2px 3px rgba(0 ,0 ,0 ,0.9)
+	
+.form-name
+	display: flex
+	justify-content: flex-start
+	align-items: center
+	flex-direction: row
+	flex-wrap: wrap
+
+.form-name label
+	position: relative
+	top: -0.5vw
+	color: #FFF
+	font-family: 'Caveat Brush', cursive
+	font-size: 4vw
+	text-shadow: 0px 2px 3px rgba(0, 0, 0, 0.9)
+
+.form-name input
+	padding: 25px 10px
+	font-size: 3vw
+	font-family: 'Aladin', cursive
+	// |Caveat+Brush|Itim|Neucha|Patrick+Hand|Audiowide|Baloo
+
+@media all and (max-width: 599px)
+	.title
+		font-size: 20vw
+	
+	.form-name label
+		font-size: 10vw
+
+	.form-name input
+		font-size: 2em
+
+@media all and (min-width: 600px) 
+	.form-name label
+		font-size: 3em
+	
+	.form-name input
+		font-size: 2em
+
+@media all and (min-width: 1200px) 
+	.form-name input
+		padding: 30px 20px
+
+
+.form-control::focus
+	border-color: 0
+	box-shadow: 0
+
+.nameFocus
+	outline: none
+	border-color: #D9534F
+	box-shadow: 0 0 5px 1px #D9534F
+	
+.reqText
+	color: red
+	text-shadow: 0px 2px 3px rgba(0 ,0 ,0 ,0.9)
+
+.btn-start
+	width: 6em
+	height: 6em
+	margin: 50px auto
+	// background: brown
+	font-size: 2em
+	font-weight: bold
+	font-family: 'Baloo Tammudu', cursive
+	border-radius: 50%
+	// word-wrap: break-word
+	white-space: normal
+
+
+///////////////////////////////////////////////////////////
+////   Camera   ///////////////////////////////////////////
+
+.camera
+	display: flex
+	justify-content: center
+	background: #000
+	height: 100vh
+	width: 100vw
+
+
+//////////////////////////////////////////////////////////
+////   World   ///////////////////////////////////////////
+
+.world
+	position: relative
+	background: mediumseagreen
+
+.world, .tile, .camera
+	overflow: hidden
+
+.tile
+	position: absolute
+
+.treeSprite
+	background: indianred
+	background: url("img/tree1.png")
+	background-size: contain
+	background-position: center
+	background-repeat: no-repeat
+
+.green
+	background: mediumseagreen
+
+.blue
+	background: blue
+
+.world, .hero, .shadow
+	// transition: all .2 ease-out//linear//ease-out
+
+
+
+/////////////////////////////////////////////////////////
+////   Hero   ///////////////////////////////////////////
+
+$color-heroShadow: rgba(255,255,255,1)
+.hero
+	width: 10px
+	height: 15px
+	border: 1px solid slategray
+	background: skyblue
+	border-radius: 50% 50% 0 0
+	border-bottom-color: #000
+	box-shadow: inset 0 0 5px 1px $color-heroShadow, 0 0 5px 2px $color-heroShadow
+
+	font-size: 10px
+	position: absolute
+	z-index: 1
+
+.hero
+	// transition: all 500ms ease-out//linear//ease-out
+	animation-fill-mode: both
+	animation-iteration-count: infinite
+	animation-name: shimmy
+	animation-duration: 1000ms
+	// animation-delay: random(5000)+ms
+         
+@keyframes shimmy
+	0% 
+		transform: rotate(20deg)
+	25% 
+		transform: rotate(0deg)
+	50% 
+		transform: rotate(-20deg)
+	75% 
+		transform: rotate(0deg)
+	100% 
+		transform: rotate(20deg)
+
+.hero::after
+	// content: attr(data-name)
+	// position: absolute
+	// top: -1px
+	// left: 10px
+	// // opacity: 0
+	// transition: 0.5s
+
+.hero:hover::after
+	opacity: 1
+
+
+.shadow
+	overflow: hidden
+	position: absolute
+	z-index: 2
+	content: ''
+
+
+/////////////////////////////////////////////////////////
+////   Other  ///////////////////////////////////////////
+
+.other
+	position: absolute
+	// background: transparent
+	z-index: 1
+	// box-shadow: inset 0 0 3px 1px #000, 0 0 3px 1px #000
+	// border-radius: 50%
+	animation-fill-mode: both
+	animation-iteration-count: infinite
+
+.other.weapon
+	// animation-name: shake
+	// animation-duration: 1500ms
+	// animation-delay: random(5000)+ms
+
+.other.item
+	// animation-name: shake
+	// animation-duration: 1200ms
+	// animation-delay: random(5000)+ms
+
+.other.boss
+	animation-name: shakeContinuous
+	animation-duration: 500ms
+	animation-delay: random(5000)+ms
+
+.other.badGuy
+	animation-name: shake
+	animation-duration: 10000ms
+	animation-delay: random(1000)+ms
+
+.other::after
+	content: attr(data-property)
+	position: absolute
+	display: inline
+	word-wrap: nowrap
+	// white-space: normal
+
+	top: -13px
+	left: 13px
+	color: #ddd
+	background: #555
+	border-radius: 2px
+	padding: 1px 2px 0px 1px
+	font-weight: bold
+	font-size: 10px
+	// opacity: 0
+	transition: 0.5s
+
+.other:hover::after
+	opacity: 1
+
+$color-item: #0bf1e0
+$color-itemShadow: rgba(255,255,255,0.75)
+.other.item
+	// position: relative
+	background: $color-item
+	// background: linear-gradient(to bottom, transparent 35%, $color-item 35%, $color-item 65%, transparent 65%), linear-gradient(to right, transparent 35%, $color-item 35%, $color-item 65%, transparent 65%)
+	// box-shadow: 0 0 20px 3px $color-itemShadow, inset 0 0 7px 0px $color-itemShadow
+	border-radius: 50%
+	
+// $color-weapon: 
+$color-weaponShadow: rgba(255,255,255,0.75)
+.other.weapon
+	background: $color-weaponShadow
+	+backgroundImg("img/icons8-Star Filled-48.png")
+	box-shadow: 0 0 10px 1px $color-weaponShadow, inset 0 0 25px 0px $color-weaponShadow
+	// border: 2px solid #fff
+	border-radius: 50%
+	
+.other.badGuy
+	background: #ee0	
+	
+.other.boss
+	background: #a00
+         
+@keyframes shake 
+	0% 
+		transform: translate(0px, 0px) rotate(0deg)
+	90% 
+		transform: translate(0px, 0px) rotate(0deg)
+	91% 
+		transform: translate(-1px, -2px) rotate(-10deg)
+	92% 
+		transform: translate(-3px, 0px) rotate(10deg)
+	93% 
+		transform: translate(0px, 2px) rotate(0deg)
+	94% 
+		transform: translate(1px, -1px) rotate(10deg)
+	95% 
+		transform: translate(-1px, 2px) rotate(-10deg)
+	96% 
+		transform: translate(-3px, 1px) rotate(0deg)
+	97% 
+		transform: translate(2px, 1px) rotate(-10deg)
+	98% 
+		transform: translate(-1px, -1px) rotate(10deg)
+	99% 
+		transform: translate(2px, 2px) rotate(0deg)
+	100% 
+		transform: translate(1px, 1px) rotate(-10deg)
+         
+@keyframes shakeContinuous
+	0% 
+		transform: translate(0px, 0px) rotate(0deg)
+	10% 
+		transform: translate(-1px, -2px) rotate(-10deg)
+	20% 
+		transform: translate(-3px, 0px) rotate(10deg)
+	30% 
+		transform: translate(0px, 2px) rotate(0deg)
+	40% 
+		transform: translate(1px, -1px) rotate(10deg)
+	50% 
+		transform: translate(-1px, 2px) rotate(-10deg)
+	60% 
+		transform: translate(-3px, 1px) rotate(0deg)
+	70% 
+		transform: translate(2px, 1px) rotate(-10deg)
+	80% 
+		transform: translate(-1px, -1px) rotate(10deg)
+	90% 
+		transform: translate(2px, 2px) rotate(0deg)
+	100% 
+		transform: translate(1px, 1px) rotate(-10deg)
+
+.dead, .other.dead
+	animation-name: deathAnimation4
+	animation-duration: 800ms
+	animation-delay: 0ms
+
+.other.dead::after
+	content: none
+
+@keyframes deathAnimation
+	0% 
+		background: firebrick
+	10% 
+		background: yellow
+	20% 
+		background: blue
+	30% 
+		background: green
+	40% 
+		background: white
+	50% 
+		background: red
+	60%
+		background: transparent
+	70% 
+		background: transparent
+	80% 
+		background: transparent
+	90% 
+		background: transparent
+	100% 
+		background: transparent
+
+@keyframes deathAnimation2
+	0% 
+		box-shadow: 0 0 5px 1px #000, inset 0 0 15px 0px #000
+	10% 
+		box-shadow: 0 0 10px 3px #000, inset 0 0 25px 0px #000
+	20% 
+		box-shadow: 0 0 15px 5px #000, inset 0 0 35px 0px #000
+	30% 
+		box-shadow: 0 0 20px 7px #000, inset 0 0 45px 0px #000
+	40% 
+		box-shadow: 0 0 25px 9px #000, inset 0 0 45px 0px #000
+	50% 
+		box-shadow: 0 0 30px 11px #000, inset 0 0 55px 0px #000
+	60%, 100%
+		box-shadow: 0 0 35px 13px #000, inset 0 0 65px 0px #000
+
+@keyframes deathAnimation3	 
+	0%
+		transform: scale(0.95) rotate(20deg)
+	10% 
+		transform: scale(0.85) rotate(40deg)
+	20% 
+		transform: scale(0.75) rotate(60deg)
+	30% 
+		transform: scale(0.65) rotate(80deg)
+	40% 
+		transform: scale(0.55) rotate(100deg)
+	50%
+		transform: scale(0.45) rotate(120deg)
+	60% 
+		transform: scale(0.35) rotate(140deg)
+	70% 
+		transform: scale(0.25) rotate(160deg)
+	80% 
+		transform: scale(0.15) rotate(180deg)
+	90%, 100% 
+		transform: scale(0) rotate(20deg)
+
+@keyframes deathAnimation4
+	from
+		transform: scale(0.95) rotate(0deg)
+	to
+		transform: scale(0.05) rotate(360deg)
+
+
+////////////////////////////////////////////////////////////
+////   Stats    ///////////////////////////////////////////
+$stats_color: #000;
+$stats_font_color: #DDD;
+.stats-container
+	display: flex
+	justify-content: space-evenly
+	align-items: center
+	flex-direction: row
+	flex-wrap: wrap
+
+	position: fixed
+	left: 0
+	bottom: 0
+	width: 100vw
+	height: 15vw
+	min-height: 50px
+	max-height: 100px
+	
+	background: $stats_color
+	// box-shadow: 0 0 15px 20px $stats_color
+	z-index: 10
+	color: $stats_font_color
+	font-family: 'Neucha', cursive
+	font-size: 4vw
+	
+.stats-title
+	font-weight: bold
+
+
+.life>.img
+	position: relative
+	top: 7px
+	height: 1.5em
+	z-index: -1
+
+.life>.hearts>.heart
+	color: #c00
+	
+.stats-container>.name
+	display: block
+
+.btn-backBtn, .logState, .level-indicator
+	position: fixed
+	z-index: 3
+
+.btn-backBtn
+	top: 0 !important
+	right: 0  !important
+	font-size: 3vw
+	padding: 5px
+	// font-family: 'Coda', cursive
+	font-family: 'Neucha', cursive
+
+
+.level-indicator
+	top: 0
+	left: 0
+	color: $stats_font_color
+	// font-family: 'Coda', cursive
+	font-family: 'Neucha', cursive
+	background: $stats_color
+	border-radius: 20%	
+	padding: 10px
+
+@media all and (max-width: 599px)
+	.stats-container, .btn-backBtn
+		font-size: 5.5vw
+		
+	.level-indicator
+		font-size: 5.5vw !important
+
+@media all and (min-width: 600px) 
+	.stats-container, .level-indicator, .btn-backBtn
+		font-size: 2.5em !important
+  
+
+
+
+////////////////////////////////////////////////////////////
+////   Arrow Btns    ///////////////////////////////////////
+
+.arrowBtns
+	position: fixed
+	bottom: 11vh
+	right: 1vh
+
+	display: table
+
+	z-index: 10
+
+.arrows
+	display: table-row
+
+$arrowDims: 8vh
+.btn-arrows
+	display: table-cell
+	width: $arrowDims
+	height: $arrowDims
+	font-size: 2em
+	color: blue
+	text-shadow: 1px 1px 2px #ddd, 0 0 1em skyblue, 0 0 0.2em #fff
+	background: transparent
+	border: none
+	padding: 0
+	opacity: 0.75
+	transition: all 0.25s ease
+
+
+.btn-arrows:focus, .btn-arrows:hover, , .btn-arrows:visited
+	background: transparent !important
+	border: none !important
+	box-shadow: none !important
+	outline:none !important
+
+.btn-arrows:active
+	opacity: 1
+	transform: scale(1.1)
+
+.btn-arrows>img
+	height: $arrowDims
+
+
+@media all and (min-width: 600px)
+	.arrowBtns
+		display: none
+
+
+
